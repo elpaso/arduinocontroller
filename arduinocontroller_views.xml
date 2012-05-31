@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+         <!-- Arduino Board Tree  -->
+        <record model="ir.ui.view" id="view_arduinocontroller_board_tree">
+            <field name="name">arduinocontroller.board.tree</field>
+            <field name="model">arduinocontroller.board</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <form string="arduino board tree">
+                    <field name="device"  select="1"/>
+                    <field name="note"  select="1"/>
+                </form>
+            </field>
+        </record>
+
+        <!-- Arduino Board Form  -->
+        <record model="ir.ui.view" id="view_arduinocontroller_board_form">            
+            <field name="name">arduinocontroller.board.form</field>
+            <field name="model">arduinocontroller.board</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="arduino board form">
+                    <group col="2" colspan="4">
+                        <group col="2">
+                            <field name="device"  select="1"/>
+                            <field name="model"  select="1"/>
+                        </group>
+                        <group col="2">
+                            <field name="note" rowspan="2" select="0"/>
+                        </group>
+                        <group col="3" colspan="4">
+                            <field name="online"  select="1" eval="False" on_change="onchange_online(online, device)"/>
+                            <button string="Refresh"
+                                    name="refresh_board"
+                                    icon="terp-mail-forward"
+                                    type="object"
+                                    attrs="{'invisible': [('online', '=', False)]}"
+                             />
+                        </group>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Digital I/O">
+                            <field name="pind2dir" on_change="onchange_pin('pind2value', pind2dir, pind2value)" select="0" />
+                            <field name="pind2value" on_change="onchange_pin('pind2value', pind2dir, pind2value)"  attrs="{'readonly':[('pind2dir','=', 1)]}" select="0"/>
+                            <field name="pind3dir" on_change="onchange_pin('pind3value', pind3dir, pind3value)"   select="0"/>
+                            <field name="pind3value" on_change="onchange_pin('pind3value', pind3dir, pind3value)"  attrs="{'readonly':[('pind3dir','=', 1)]}" select="0"/>
+                            <field name="pind4dir" on_change="onchange_pin('pind4value', pind4dir, pind4value)"   select="0"/>
+                            <field name="pind4value" on_change="onchange_pin('pind4value', pind4dir, pind4value)"  attrs="{'readonly':[('pind4dir','=', 1)]}" select="0"/>
+                            <field name="pind5dir" on_change="onchange_pin('pind5value', pind5dir, pind5value)"   select="0"/>
+                            <field name="pind5value" on_change="onchange_pin('pind5value', pind5dir, pind5value)"   attrs="{'readonly':[('pind5dir','=', 1)]}" select="0"/>
+                            <field name="pind6dir" on_change="onchange_pin('pind6value', pind6dir, pind6value)"   select="0"/>
+                            <field name="pind6value" on_change="onchange_pin('pind6value', pind6dir, pind6value)"  attrs="{'readonly':[('pind6dir','=', 1)]}" select="0"/>
+                            <field name="pind7dir" on_change="onchange_pin('pind7value', pind7dir, pind7value)"   select="0"/>
+                            <field name="pind7value" on_change="onchange_pin('pind7value', pind7dir, pind7value)"  attrs="{'readonly':[('pind7dir','=', 1)]}" select="0"/>
+                            <field name="pind8dir" on_change="onchange_pin('pind8value', pind8dir, pind8value)"   select="0"/>
+                            <field name="pind8value" on_change="onchange_pin('pind8value', pind8dir, pind8value)"   attrs="{'readonly':[('pind8dir','=', 1)]}" select="0"/>
+                            <field name="pind9dir" on_change="onchange_pin('pind9value', pind9dir, pind9value)"   select="0"/>
+                            <field name="pind9value" on_change="onchange_pin('pind9value', pind9dir, pind9value)"  attrs="{'readonly':[('pind9dir','=', 1)]}" select="0"/>
+                            <field name="pind10dir" on_change="onchange_pin('pind10value', pind10dir, pind10value)"   select="0"/>
+                            <field name="pind10value" on_change="onchange_pin('pind10value', pind10dir, pind10value)"  attrs="{'readonly':[('pind10dir','=', 1)]}" select="0"/>
+                            <field name="pind11dir" on_change="onchange_pin('pind11value', pind11dir, pind11value)"   select="0"/>
+                            <field name="pind11value" on_change="onchange_pin('pind11value', pind11dir, pind11value)"  attrs="{'readonly':[('pind11dir','=', 1)]}" select="0"/>
+                            <field name="pind12dir" on_change="onchange_pin('pind12value', pind12dir, pind12value)"   select="0"/>
+                            <field name="pind12value" on_change="onchange_pin('pind12value', pind12dir, pind12value)"  attrs="{'readonly':[('pind12dir','=', 1)]}" select="0"/>
+                            <field name="pind13dir" on_change="onchange_pin('pind13value', pind13dir, pind13value)"   select="0"/>
+                            <field name="pind13value" on_change="onchange_pin('pind13value', pind13dir, pind13value)"  attrs="{'readonly':[('pind13dir','=', 1)]}" select="0"/>
+                       </page>
+                       <page string="Analog inputs">
+                            <field name="pina0active" select="0"/>
+                            <field name="pina0value" readonly="1" select="0"/>
+                            <field name="pina1active" select="0"/>
+                            <field name="pina1value" readonly="1"  select="0"/>
+                            <field name="pina2active" select="0"/>
+                            <field name="pina2value" readonly="1"  select="0"/>
+                            <field name="pina3active"  select="0"/>
+                            <field name="pina3value" readonly="1"  select="0"/>
+                            <field name="pina4active"  select="0"/>
+                            <field name="pina4value" readonly="1"  select="0"/>
+                            <field name="pina5active" select="0"/>
+                            <field name="pina5value" readonly="1"  select="0"/>
+                       </page>
+                   </notebook>
+                </form>
+            </field>
+        </record>
+
+        <!-- Arduino Action  -->
+        <record model="ir.actions.act_window" id="action_arduino_board_form">
+            <field name="name">Board</field>
+            <field name="res_model">arduinocontroller.board</field>
+            <field name="view_id" ref="view_arduinocontroller_board_tree"/>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">Help on this view</field>            
+        </record>
+
+        <menuitem name="Arduino" icon="terp-project" id="arduino_menu" action="action_arduino_board_form"/>
+        <menuitem name="Boards" parent="arduino_menu" id="arduino_menu_mainform" action="action_arduino_board_form"/>
+
+
+    </data>
+</openerp>

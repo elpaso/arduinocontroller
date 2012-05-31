@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_arduinocontroller_board_user,arduinocontroller.board user,model_arduinocontroller_board,base.group_tool_user,1,1,1,1
