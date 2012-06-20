@@ -100,6 +100,29 @@ class arduinocontroller_board(osv.osv):
         'model': 'uno',
         }
 
+    def default_get(self, cr, uid, fields_list, context=None):
+        """
+        Set defaults
+        """
+        if context is None:
+            context = {}
+
+        dbg('Default get called')
+        
+        
+        # Digital pins        
+        for i in range(2, 14):
+            context['default_pind%ddir' % i] = context.get('pind%ddir' % i, PINMODE_OUTPUT)
+            context['default_pind%dvalue' % i] = context.get('pind%dvalue' % i, 0)
+
+        # Analog pins        
+        for i in range(0, 6):
+            context['default_pina%dactive' % i] = context.get('pina%dactive' % i, False)
+
+        v = super(arduinocontroller_board, self).default_get(cr, uid, fields_list, context)
+        return v
+            
+
     # Let's support multiple configurations for the same device!
     #_sql_constraints = [('unique_model_device', 'unique(model, device)', 'Model and device must be unique')]
 
@@ -215,7 +238,7 @@ class arduinocontroller_board(osv.osv):
 
     def write(self, cr, uid, ids, vals, context=None):
         """
-        Update redord(s) exist in {ids}, with new value provided in {vals}
+        Update record(s) exist in {ids}, with new value provided in {vals}
 
         @param cr: A database cursor
         @param user: ID of the user currently logged in
@@ -235,7 +258,7 @@ class arduinocontroller_board(osv.osv):
                 board = self._get_board(record.device)
                 if board:
                     parms.update(vals)
-                    vals = self._setup_board(board, record.device, **parms)
+                    vals.update(self._setup_board(board, record.device, **parms))
         except util.serial.SerialException:
             raise osv.except_osv('Device is set online but cannot communicate with Arduino', 'Please check your connections and settings on device %s.' % record.device)
             

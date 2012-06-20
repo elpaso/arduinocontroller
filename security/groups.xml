@@ -2,10 +2,10 @@
 <openerp>
 <data>
 
-    <record model="res.groups" id="base.group_tool_user">
-        <field name="name">User</field>
-        <field name="arduinocontroller_board_id" ref="base.module_category_tools"/>
+    <record id="group_arduinocontroller_user" model="res.groups">
+        <field name="name">Arduino Controller / User</field>
     </record>
+    
 
 </data>
 </openerp>
